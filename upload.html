@@ -19,6 +19,9 @@
             <header class="topbar">
                 <h1>Upload Video</h1>
                 <div class="headerControls">
+                    <span id="userInfo">Not signed in</span>
+                    <button id="signInBtn">Sign in</button>
+                    <button id="signOutBtn" style="display: none;">Sign out</button>
                     <button id="pickBtn">Pick files</button>
                     <button id="uploadBtn">Start Upload</button>
                 </div>
@@ -27,11 +30,11 @@
             <div class="uploadContainer">
                 <div id="dropzone" class="dropzone">Drag and drop videos here or click Pick files</div>
                 <input id="fileInput" type="file" accept="video/*" multiple style="display: none;" />
-
                 <div id="queue"></div>
             </div>
 
-            <script src="upload.js"></script>
+            <script type="module" src="supabaseClient.js"></script>
+            <script type="module" src="upload-supabase.js"></script>
         </main>
     </body>
 </html>

@@ -38,7 +38,7 @@ signOutBtn.addEventListener('click', async () => {
 });
 
 pickBtn.addEventListener('click', () => fileInput.click());
-fileInput.addEventListener('change', e => addFiles({...e.target.files}));
+fileInput.addEventListener('change', e => addFiles(Array.from(e.target.files)));
 
 dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('dragging'); });
 dropzone.addEventListener('dragleave', (e) => { dropzone.classList.remove('dragging'); });
@@ -62,7 +62,7 @@ uploadBtn.addEventListener('click', async () => {
 });
 
 function addFiles(files) {
-    files.foreach(file => {
+    files.forEach(file => {
         if (!file.type.startsWith('video/')) return;
         filesQueue.push(file);
         renderQueueItem(file, filesQueue.length - 1);
@@ -77,14 +77,14 @@ function renderQueueItem(file, idx) {
     <div style="display:flex;gap:12px;align-items:center;">
       <div style="min-width:220px;">
         <div style="font-weight:700">${file.name}</div>
-        <div style="font-size:13px;color:#666">${sizeMB} MB</div>
+        <div style="font-size:13px;color:#666">${sizeMb} MB</div>
       </div>
       <div class="progress"><span id="p${idx}" style="width:0%"></span></div>
     </div>
     <div><button class="remove" data-idx="${idx}">Remove</button></div>
     `;
     queueEl.appendChild(item);
-    item.querySelector('.remove').addEventListener('click', () => {
+    item.querySelector('.remove').addEventListener('click', (e) => {
         const i = Number(e.target.dataset.idx);
         filesQueue[i] = null;
         item.remove();
